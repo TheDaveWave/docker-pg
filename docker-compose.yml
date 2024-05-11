@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  postgres:
+    build:
+      context: ./
+    image: postgres:latest
+    container_name: testdb
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRESQL_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

@@ -1,0 +1,30 @@
+# Add Copyright Information
+FROM postgres:latest
+LABEL maintainer='david.wesley.lindberg@gmail.com'
+
+RUN apt-get -y update && \
+    apt-get -y dist-upgrade && \
+    apt-get -y upgrade
+
+
+# On startup Postgres will load the SQL files into the database.
+# COPY ./assets/initdb.sql /docker-entrypoint-initdb.d/
+
+COPY ./assets/ /tmp/
+
+RUN chown postgres:postgres /tmp/*.sql
+RUN chmod 777 /docker-entrypoint-initdb.d
+
+WORKDIR /opt/app
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+## BUILD FOR LOCAL ENVIRONMENT
+## Copy these commands in run them in the integrated terminal:
+# docker build -f Dockerfile.test  -t dev_sql .
+## RUN
+# docker run --name dev_sql -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres dev_sql
+## START
+# docker exec -u postgres -it dev_sql /bin/bash
+# INSIDE CONTAINER
+# bash /tmp/init.sh
