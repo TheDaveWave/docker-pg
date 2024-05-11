@@ -5,5 +5,5 @@ CREATE TABLE public.test (
     last_nane text,
     access_level integer,
     phone_number text,
-    email UNIQUE text,
+    email text UNIQUE
 );

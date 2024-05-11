@@ -7,12 +7,10 @@ RUN apt-get -y update && \
     apt-get -y upgrade
 
 
-# On startup Postgres will load the SQL files into the database.
-# COPY ./assets/initdb.sql /docker-entrypoint-initdb.d/
-
 COPY ./assets/ /tmp/
 
-RUN chown postgres:postgres /tmp/*.sql
+# RUN chown postgres:postgres /tmp/*.sql
+RUN chown -R postgres:postgres /tmp/*.sql
 RUN chmod 777 /docker-entrypoint-initdb.d
 
 WORKDIR /opt/app

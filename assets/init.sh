@@ -10,7 +10,7 @@ if test -f "$DUMP"; then
     cp "$DUMP" /docker-entrypoint-initdb.d/
 else 
     echo "$DUMP does not exist."
-    cp /tmp/initdb.sql /docker-entrypoint-initdb.d/
+    shopt -s globstar && cp -Rv /tmp/**/*.sql /docker-entrypoint-initdb.d/
 fi
 
 /usr/local/bin/docker-entrypoint.sh postgres -c wal_level=logical &
