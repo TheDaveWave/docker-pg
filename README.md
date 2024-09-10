@@ -10,9 +10,14 @@ and the `.sql` files inside of those schema folders become the tables as part of
 
 ## How to use
 Right click the Dockerfile.test in VsCode and select `open in integrated terminal`.
-Then follow the commented instruction in the Dockerfile.test
+Then follow the commented instruction in the Dockerfile.test  
+OR  
+Use your terminal and change directory to this project and run the commented instructions in the Dockerfile.test
 
-## Connect with PgADMIN
+## Connect with pgAdmin
+
+- [pgAdmin](https://www.pgadmin.org/download/)
+
 Register a new server using:
 - host: `localhost`
 - port: `5432`
